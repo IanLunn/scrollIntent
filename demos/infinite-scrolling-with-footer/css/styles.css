@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#header,
+#content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+#content {
+  padding: 2em 1em;
+}
+
+#load-more {
+  display: block;
+  max-width: 250px;
+  margin: 2em auto;
+  padding: .8em .4em;
+  background: #429463;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+
+}
+
+#load-more:hover {
+  background: #317B63;
+}
+
+#footer {
+  padding: 1em;
+  background: #317B63;
+  color: white;
+  font-size: 2em;
+}
+
+#console {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  bottom: 20px;
+  width: 300px;
+  padding: 1em;
+  font-size: .8em;
+  background: black;
+  background: rgba(0,0,0,.8);
+  color: white;
+  z-index: 99;
+}
+
+#activity {
+  font-size: 1.5em;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#console a {
+  color: white;
+}

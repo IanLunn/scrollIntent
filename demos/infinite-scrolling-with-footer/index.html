@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <title>Infinite Scrolling with Footer - scrollIntent.js Demo</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Arvo|PT+Sans' rel='stylesheet' type='text/css'>
+  <link href="/css/main.css" rel="stylesheet" media="all">
+  <link href="css/styles.css" rel="stylesheet" media="all">
+</head>
+<body>
+
+<a href="https://github.com/IanLunn/scrollIntent/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 100;" src="https://github-camo.global.ssl.fastly.net/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
+  <div id="header" role="banner">
+    <h1>Header.</h1>
+  </div>
+
+  <div id="content">
+
+    <div class="nav">
+      <a class="back" href="/index.html">← About Scroll Intent</a> -
+
+  		<div class="social-button">
+  			<iframe src="http://ghbtns.com/github-btn.html?user=IanLunn&repo=scrollIntent&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+  		</div>
+
+  		<div class="social-button">
+  			<a href="https://twitter.com/share" class="twitter-share-button" data-related="IanLunn" data-dnt="true">Tweet</a>
+  			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  		</div>
+    </div>
+
+    <h1>ScrollIntent.js</h1>
+    <h2>Infinite Scrolling with a Footer Demo</h2>
+    <p>In this demo, scrollIntent.js is used to create infinite scrolling that loads content as you reach the bottom of the page. However, content will only load when the page is being scrolled slowly -- when we can assume the user is focused on content. When srolling to the bottom of the page quickly, additional content won't load, allowing the user to reach the footer.</p>
+    <p>ScrollIntent.js is given 2 actions that describe the behaviour of a user and what functionality should be executed based on that behaviour.</p>
+
+    <h3>Actions</h3>
+    <p>The following actions are used to load additional content:</p>
+
+    <ul>
+      <li>Load more content when the user scrolls down past a waypoint 300px from the bottom of the screen, at a speed slower than 40px per 100ms (using the mousewheel or scrollbar)</li>
+      <li>Load more content when the user scrolls down past a waypoint 300px from the bottom of the screen (using the down or space keys)</li>
+    </ul>
+
+    <p>In code, these actions are written like so:</p>
+    <code>
+      <pre>
+var actions = [
+
+  //ACTION 1
+  {
+    // When the user is scrolling via mousewheel or scrollbar
+    scrollMethod: ["mousewheel", "scrollbar"],
+
+    // Bottom of the page
+    waypoint: "100%",
+
+    /*
+     * Makes the waypoint relative to the page rather than the window
+     * that scrollIntent is bound to
+     */
+    waypointRelativeTo: document.body,
+
+    // Move the waypoint up from the bottom of the body/document, by 300px
+    waypointOffset: -300,
+
+    // Only when the user is scrolling less than 40px per 100ms
+    maxSpeed: 40,
+
+    // Only when the user is scrolling down
+    direction: "down",
+
+    /*
+     * Execute the fakeAjax.load() function when all of the above
+     * conditions are met
+     */
+    callback: function(scrollIntent) {
+
+      fakeAjax.load();
+    }
+  },
+
+  //ACTION 2
+  {
+    // When the user is scrolling by hitting space or the down key
+    scrollMethod: ["down", "space"],
+
+    // Only execute the callback if this is the first key press per action
+    keyPressesPerEvent: 1,
+
+    // Bottom of the page
+    waypoint: "100%",
+
+    /*
+     * Makes the waypoint relative to the page rather than the window
+     * that scrollIntent is bound to
+     */
+    waypointRelativeTo: document.body,
+
+    // Move the waypoint up from the bottom of the body/document, by 2 screens
+    waypointOffset: -300,
+
+    // Execute the fakeAjax.load() function when all of the above conditions are met
+    callback: function() {
+
+      fakeAjax.load();
+    }
+  }
+];
+
+// scrollIntent options
+var options = {
+
+  // Turn on developerIndicators (red and blue lines to show waypoints)
+  developerIndicators: true,
+
+  // Move the scrollY position to 90% of the window
+  scrollYOffset: "90%"
+};
+
+// Initiate scrollIntent on the window with the above actions and options
+scrollIntent = new ScrollIntent(window, actions, options);
+      </pre>
+    </code>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p>
+
+    <p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p>
+
+    <p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p>
+
+    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p>
+
+    <p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p>
+
+    <p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p>
+
+    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p>
+
+    <p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p>
+
+    <p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p>
+
+    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. viverra luctus nulla Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p>
+
+    <p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient viverra luctus nulla montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p>
+
+    <p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p>
+  </div>
+
+  <a id="load-more" href="#">Load more content</a>
+
+  <div id="console">
+    <h3>Infinite Scrolling Demo:</h3>
+    <div id="status">
+        <p>1. Scroll down until the red waypoint comes into view towards the bottom of the page. Now slowly scroll down at a speed no greater than 40px per 100ms (see the scroll speed indicator) so the red waypoint passes the blue line. When it does, new content will be loaded and the waypoint will be repositioned to always be 300px from the bottom of the page. Each time you pass the waypoint at this slow speed, new content is loaded -- creating "infinite scrolling".</p>
+        <p>2. The next time the waypoint passes the blue line, scroll at a speed greater than 40px per 100ms. The loading of new content will be skipped and you'll be able to reach the bottom of the page.</p>
+        <p>When the user scrolls slowly, we can assume they are focused on the content. Loading more content as the user reaches the bottom allows them to remain focused on reading. However, to make the page more accessible and less frustrating for the user, when they scroll at a speed that suggests they are more focused on navigating elsewhere, we can skip loading content so they can reach the bottom of the page. A more inutitive approach to infinite scrolling!</p>
+        <div id="activity"></div>
+    </div>
+    <div class="bottom">
+      <span>Scroll Speed: <span id="speed">0</span></span> | <a id="top" href="#header">To Top</a> | <a id="bottom" href="#footer">To Bottom</a>
+    </div>
+  </div>
+
+  <div id="footer">
+    Footer.
+  </div>
+
+  <script src="../../js/scrollIntent.js"></script>
+  <script>
+
+    var windowScrollIntent,
+        previousSpeed = 0;
+
+    // Get the elements we're going to use
+    var status = document.getElementById("status"),
+        speed = document.getElementById("speed"),
+        activity = document.getElementById("activity"),
+        loadMore = document.getElementById("load-more"),
+        content = document.getElementById("content");
+
+    /*
+     * Adds new content to the page
+     * (this will be replaced by your AJAX functionality)
+     */
+    var fakeAjax = {
+      load: function() {
+
+        // Show the "New content loaded" status message, then hide it
+        activity.innerHTML = "New content loaded";
+        setTimeout(function() {
+          activity.innerHTML = "";
+        }, 2000);
+
+        // Add more content
+        var newContent = document.createElement("div");
+        newContent.innerHTML = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus <a href="#">mollis at</a>. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p><p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p><p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p><p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, <a href="#">molestie massa vel</a>, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p><p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p><p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p><p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse <a href="#">viverra luctus nulla</a> at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus <a href="#">mollis at</a>. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p><p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p><p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p><p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse viverra luctus nulla at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p><p>Duis vel ante at odio dapibus posuere. Aenean vel nibh nulla. Vestibulum porttitor orci eu nisi dapibus condimentum. Sed sollicitudin, metus a tristique mollis, ipsum enim viverra dolor, porttitor porttitor leo urna a lectus. Vivamus ut dui eleifend, pulvinar mi sit amet, dapibus elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam porta turpis est, non mollis lacus tincidunt a. Suspendisse ut felis congue, interdum nisl a, molestie nunc. Mauris porta dui ut lorem eleifend, ac aliquam dolor gravida. Curabitur luctus libero vel sem ullamcorper, a semper sem tincidunt. Nullam erat nisl, euismod sed dapibus id, facilisis ut arcu. In auctor adipiscing ullamcorper. Phasellus porta, purus ut condimentum ullamcorper, purus turpis interdum nisi, sit amet tempus massa orci quis massa. Integer non sem quis eros gravida volutpat nec eu mi. Integer ac elementum nibh.</p><p>Etiam sit amet tortor ultricies, sollicitudin arcu aliquam, semper lectus. Nulla nec metus justo. Mauris condimentum eget metus eget pellentesque. Ut sit amet augue eget enim interdum commodo sit amet ut felis. Aliquam pretium pulvinar nulla. Aliquam erat volutpat. Cras imperdiet massa quis elit posuere, ut ullamcorper dui aliquam. Nam non laoreet lectus. Fusce commodo diam ac lorem auctor consectetur.</p><p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas sed purus leo. Nunc rutrum odio eu pretium sagittis. In hac habitasse platea dictumst. Quisque condimentum euismod tellus eu dapibus. Pellentesque non sapien imperdiet, posuere urna non, cursus lacus. Vivamus egestas non nibh ut accumsan. Sed volutpat nisi in feugiat vestibulum. Suspendisse dapibus lorem eu tincidunt bibendum. Maecenas vestibulum dolor sed tempor molestie.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis vel orci sit amet placerat. Morbi eget elementum nisl. Quisque accumsan magna vel lorem mollis, vitae vulputate libero gravida. Suspendisse <a href="#">viverra luctus nulla</a> at ultrices. Duis non mauris dignissim nibh vulputate ullamcorper. Curabitur accumsan molestie consectetur. Aenean ultrices risus in magna volutpat porttitor. Morbi ac orci volutpat, molestie massa vel, dictum nibh. In eget massa quam. Donec convallis eros purus, mattis accumsan lectus mollis at. Aliquam varius, lectus eget venenatis volutpat, lorem risus semper urna, nec rutrum purus metus sit amet metus. Proin ut urna tellus. Nullam nec lorem enim.</p>';
+
+        //add the new content to the existing content
+        content.appendChild(newContent);
+      }
+    };
+
+    // Actions to be used with scrollIntent
+    var actions = [
+
+      //ACTION 1
+      {
+        // When the user is scrolling via mousewheel or scrollbar
+        scrollMethod: ["mousewheel", "scrollbar"],
+
+        // Bottom of the page
+        waypoint: "100%",
+
+        /*
+         * Makes the waypoint relative to the page rather than the window
+         * that scrollIntent is bound to
+         */
+        waypointRelativeTo: document.body,
+
+        // Move the waypoint up from the bottom of the body/document, by 300px
+        waypointOffset: -300,
+
+        // Only when the user is scrolling less than 40px per 100ms
+        maxSpeed: 40,
+
+        // Only when the user is scrolling down
+        direction: "down",
+
+        /*
+         * Execute the fakeAjax.load() function when all of the above
+         * conditions are met
+         */
+        callback: function(scrollIntent) {
+
+          fakeAjax.load();
+        }
+      },
+
+      //ACTION 2
+      {
+        // When the user is scrolling by hitting space or the down key
+        scrollMethod: ["down", "space"],
+
+        // Only execute the callback if this is the first key press per action
+        keyPressesPerEvent: 1,
+
+        // Bottom of the page
+        waypoint: "100%",
+
+        /*
+         * Makes the waypoint relative to the page rather than the window
+         * that scrollIntent is bound to
+         */
+        waypointRelativeTo: document.body,
+
+        // Move the waypoint up from the bottom of the body/document, by 2 screens
+        waypointOffset: -300,
+
+        // Execute the fakeAjax.load() function when all of the above conditions are met
+        callback: function() {
+
+          fakeAjax.load();
+        }
+      }
+    ]
+
+    // scrollIntent options
+    var options = {
+
+      // Turn on developerIndicators (red and blue lines to show waypoints)
+      developerIndicators: true,
+
+      // Move the scrollY position to 90% of the window
+      scrollYOffset: "90%"
+    };
+
+    // Initiate scrollIntent on the window with the above actions and options
+    scrollIntent = new ScrollIntent(window, actions, options);
+
+    // When the load more button is clicked
+    if (!loadMore.addEventListener) {
+
+      //for oldIE
+      loadMore.attachEvent("onclick", function(event){
+
+        (event.preventDefault) ? event.preventDefault() : event.returnValue = false;
+        fakeAjax.load();
+      });
+    }else {
+
+      // When the load more button is clicked
+      loadMore.addEventListener("click", function(event) {
+
+        // Prevent the <a> link from leading anywhere
+        (event.preventDefault) ? event.preventDefault() : event.returnValue = false;
+
+        /*
+         * Load more content (We're just faking pulling in content via AJAX by
+         * appending so content, replace this with your actual AJAX functionality)
+         */
+        fakeAjax.load();
+      });
+    }
+
+    // Show the current scroll speed every 100ms
+    scrollIntent.scrolling = function() {
+
+      speed.innerHTML = scrollIntent.scrollAmount;
+      previousSpeed = scrollIntent.scrollAmount;
+    };
+
+  </script>
+</body>
+</html>

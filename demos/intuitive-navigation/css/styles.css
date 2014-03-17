@@ -1,0 +1,25 @@
+#speed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ccc;
+  z-index: 1;
+
+  -webkit-transition: top .5s;
+  -moz-transition: top .5s;
+  -ms-transition: top .5s;
+  -o-transition: top .5s;
+  transition: top .5s;
+}
+
+#header.close {
+  top: -100%;
+  transition-duration: 1s;
+}
