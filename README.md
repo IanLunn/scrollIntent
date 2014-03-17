@@ -4,33 +4,28 @@ With scrollIntent, you can determine what a user intends to achieve based on the
 
 Example uses:
 
-- [A Step Toward Better Infinite Scrolling](#infinite-scrolling)
-- [Offer Immediate Navigation when the User Needs it](#immediate-navigation)
-- [Disable Unnecessary Animations to Improve Performance](#disable-animation-when-scrolling)
+- [A Step Toward Better Infinite Scrolling](#a-step-toward-better-infinite-scrolling)
+- [Offer Immediate Navigation when the User Needs it](#offer-immediate-navigation-when-the-user-needs-it)
 
-### <a name="infinite-scrolling">A Step Toward Better Infinite Scrolling</a>
+### A Step Toward Better Infinite Scrolling
 
 On a page with infinite scrolling, if the user is scrolling down slowly, we can assume they are focused on the content and continue loading more content as they scroll. However, when the user scrolls down too fast to be focused on content, we can then stop loading content and instead, allow the user to naturally reach the page's end. Infinite scrolling with a footer -- the best of both worlds!
 
-### <a name="immediate-navigation">Offer Immediate Navigation when the User Needs it</a>
+### Offer Immediate Navigation when the User Needs it
 
 As with the infinite scrolling example, if a user starts scrolling over a certain speed, we can assume they are no longer interested in the content and instead want to navigate elsewhere. Rather than make the user scroll all the way to the top/bottom of the page to reach navigation, we can show that navigation via CSS/jQuery sooner.
 
-### <a name="disable-animation-when-scrolling">Disable Unnecessary Animations to Improve Performance</a>
-
-When a user is scrolling fast, do animations they are going to whizz past really need to be running? Do images they aren't going to see need to load? Disable animations and interactions whilst the user is scrolling to save the browser having to repaint particular elements. See [HTML5 Rocks](http://www.html5rocks.com/) Tutorial: [Avoiding Unnecessary Paints](http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/)
-
-## <a name="how-scrollIntent-works">How scrollIntent Works</a>
+## How scrollIntent Works
 
 scrollIntent monitors the scrolling behaviour of a user to allow you to execute functionality specific to that behaviour.
 
 When a user begins scrolling, scrollIntent will determine attributes of scrolling, such as the direction, speed, method of scrolling and so on. These attributes can then be queried by a developer to determine when a function specific to a certain behaviour should be executed.
 
-## <a name="usage">Usage</a>
+## Usage
 
-Please see Documentation for complete usage instructions.
+Please see [Documentation](https://github.com/IanLunn/scrollIntent/blob/master/documentation.md) for complete usage instructions.
 
-## <a name="browser-support">Browser Support</a>
+## Browser Support
 
 Tested with the following desktop browser:
 
@@ -42,28 +37,30 @@ Tested with the following desktop browser:
 
 scrollIntent is not supported on mobile/tablet devices. See [Limitations](#limitations).
 
-## <a name="performance">Performance</a>
+## Performance
 
 When executing JavaScript during scrolling, care should be taken to ensure there are no impacts on performance. scrollIntent will run multiple conditional checks as the user scrolls. To do this without affecting performance, these conditional checks are run every 100 milliseconds. This amount of time can be changed in `options`. You should aim for a fine balance between performance and responsiveness of functions executed by scrollIntent.
 
-## <a name="limitations">Limitations</a>
+## Limitations
 
 scrollIntent is developed for desktops only. For this reason, scrollIntent should be used for enhancing a website only.
 
 scrollIntent doesn't work on mobile/tablets due to these devices applying limitations on JavaScript during scrolling. There are ways to work around this, such as using [iScroll](http://cubiq.org/iscroll-5) -- which "hijacks" the browsers scrolling mechanism. However, work arounds that "hijack" scrolling may add usability issues to a web page. Furthermore, scrollIntent most likely could with with iScroll but the two haven't been tested together.
 
-## <a name="todo">Todo List</a>
+## Todo List
 
 - `destroy()` function
 - Make `setupDeveloperIndicators` also apply indicators for `minWaypoint` and `maxWaypoint`
 
-## <a name="author">Author</a>
+## Author
 
 Ian Lunn
 
-[GitHub](https://github.com/IanLunn) | [Twitter](https://twitter.com/IanLunn) | [Website](http://ianlunn.co.uk/)
+- [GitHub](https://github.com/IanLunn)
+- [Twitter](https://twitter.com/IanLunn)
+- [Website](http://ianlunn.co.uk/)
 
-## <a name="support-development">Support Future Development</a>
+## Support Future Development
 
 To support the future development of scrollIntent.js and other open source projects created by [Ian Lunn](https://github.com/IanLunn), please consider making a donation.
 

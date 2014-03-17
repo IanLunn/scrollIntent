@@ -6,31 +6,24 @@ With scrollIntent, you can determine what a user intends to achieve based on the
 
 Example uses:
 
-- [A Step Toward Better Infinite Scrolling](#infinite-scrolling)
-- [Offer Immediate Navigation when the User Needs it](#immediate-navigation)
-- [Disable Unnecessary Animations to Improve Performance](#disable-animation-when-scrolling)
+- [A Step Toward Better Infinite Scrolling](#a-step-toward-better-infinite-scrolling)
+- [Offer Immediate Navigation when the User Needs it](#offer-immediate-navigation-when-the-user-needs-it)
 
-### <a name="infinite-scrolling">A Step Toward Better Infinite Scrolling</a>
+### A Step Toward Better Infinite Scrolling
 
 On a page with infinite scrolling, if the user is scrolling down slowly, we can assume they are focused on the content and continue loading more content as they scroll. However, when the user scrolls down too fast to be focused on content, we can then stop loading content and instead, allow the user to naturally reach the page's end. Infinite scrolling with a footer -- the best of both worlds!
 
-
-### <a name="immediate-navigation">Offer Immediate Navigation when the User Needs it</a>
+### Offer Immediate Navigation when the User Needs it
 
 As with the infinite scrolling example, if a user starts scrolling over a certain speed, we can assume they are no longer interested in the content and instead want to navigate elsewhere. Rather than make the user scroll all the way to the top/bottom of the page to reach navigation, we can show that navigation via CSS/jQuery sooner.
 
-### <a name="disable-animation-when-scrolling">Disable Unnecessary Animations to Improve Performance</a>
-
-When a user is scrolling fast, do animations they are going to whizz past really need to be running? Do images they aren't going to see need to load? Disable animations and interactions whilst the user is scrolling to save the browser having to repaint particular elements. See [HTML5 Rocks](http://www.html5rocks.com/) Tutorial: [Avoiding Unnecessary Paints](http://www.html5rocks.com/en/tutorials/speed/unnecessary-paints/)
-
-
-## <a name="how-scrollIntent-works">How scrollIntent Works</a>
+## How scrollIntent Works
 
 scrollIntent monitors the scrolling behaviour of a user to allow you to execute functionality specific to that behaviour.
 
 When a user begins scrolling, scrollIntent will determine attributes of scrolling, such as the direction, speed, method of scrolling and so on. These attributes can then be queried by a developer to determine when a function specific to a certain behaviour should be executed.
 
-## <a name="using-scrollIntent">Using scrollIntent</a>
+## Using scrollIntent
 
 scrollIntent is a standalone JavaScript plugin that can be initiated on multiple elements.
 
@@ -42,7 +35,7 @@ As shown in this code example, scrollIntent must be passed an element to be atta
 
 [Actions](#actions) are a combination of conditions and a callback -- a function to be executed when the specified conditions are met. More on [actions](#actions) shortly.
 
-### <a name="including-scrollIntent">Including scrollIntent on a web page</a>
+### Including scrollIntent on a web page
 
 For best results, scrollIntent should be placed at the bottom of a HTML page, just before the closing `</body>` element. This will ensure scrollIntent loads when the page is ready.
 
@@ -91,7 +84,7 @@ Multiple instances of scrollIntent can be initiated like so:
 
 With scrollIntent attached to an element(s), you can then specify [actions](#actions), which consist of a callback and the conditions that need to be met before the callback is executed.
 
-### <a name="actions">Actions</a>
+### Actions
 
 Actions consist of:
 
@@ -99,7 +92,7 @@ Actions consist of:
 - [conditions](#conditions) - describe the user's behaviours required for the callback to be executed
 - [action modifiers](#action-modifiers) - options that change the way in which actions work
 
-#### <a name="callback">callback</a> `function(scrollIntent)`
+#### callback `function(scrollIntent)`
 
 `callback` is a function which is executed once all defined conditions are met.
 
@@ -115,9 +108,9 @@ Actions consist of:
 
 In the above example, the callback will show a message when the user scrolls down (`direction: down`). An action modifier is used (`callbacksPerAction: 1`) to make the callback execute only once each time the user carries out this action.
 
-The callback is passed `scrollIntent`, which can be used to retrieve scrollIntent's [public variables](#public-variables).
+The callback is passed `scrollIntent`, which can be used to retrieve scrollIntent's [public variables](#public-variables-and-methods).
 
-#### <a name="conditions">Conditions</a>
+#### Conditions
 Conditions describe the behaviour of the user required to execute the [callback](#callback).
 
 The following describes each condition.
@@ -212,9 +205,9 @@ A custom function that must return `true` or `false`. If `true` is returned, the
 
 In the above example, the `custom` function will always return true.
 
-The custom function is passed `scrollIntent`, which can be used to retrieve scrollIntent's [public variables](#public-variables).
+The custom function is passed `scrollIntent`, which can be used to retrieve scrollIntent's [public variables](#public-variables-and-methods).
 
-#### <a name="action-modifiers">Action Modifiers</a>
+#### Action Modifiers
 
 Action modifiers change the way in which an `action` behaves.
 
@@ -357,7 +350,7 @@ The user will now need to scroll 200px plus, 50% of the page height (200px over 
 
 When a certain number of callbacks have been executed, the action will be destroyed so it can no longer execute.
 
-### <a name="multiple-actions">Multiple Actions Per Element</a>
+### Multiple Actions Per Element
 
 ScrollIntent supports multiple actions per element, simply by placing each `action` object within an array, like so:
 
@@ -381,11 +374,11 @@ ScrollIntent supports multiple actions per element, simply by placing each `acti
 In this example, when the user scrolls down, the `hideMenu` function will be executed, and when scrolling up, the `showMenu` function will be texecuted.
 
 
-### <a name="options">Options</a>
+### Options
 
 Options allow you to change the way in which scrollIntent operates. All of scrollIntent's options are already set by default so you don't need to specify your own options. Should you need to override a default option though, does so via the following options.
 
-#### <a name="scrollYOffset">scrollYOffset</a> `number` or `string`
+#### scrollYOffset `number` or `string`
 
 Default: `0` (the top of the viewport)  
 Example: `50` or `"90%"`
@@ -397,7 +390,7 @@ Number: A pixel value, `50` equates to 50px.
 String: A percentage value, `"90%"` equates to 90% of the height of the viewport. When using percentage values within a string, using the `%` indentifier is optional - `"50%"` and `"50"` both represent 50% providing the values are within a string.
 
 
-#### <a name="scrollThreshold">scrollThreshold</a> `number`
+#### scrollThreshold `number`
 
 Default: `100` (milliseconds)
 
@@ -423,7 +416,7 @@ Reset the duration of the scroll event if the scroll direction changes.
 
 When using the `minDuration` and/or `maxDuration` conditions, the duration will be reset when the user changes scroll direction.
 
-#### <a name="developerIndicators">developerIndicators</a> `true` or `false`
+#### developerIndicators `true` or `false`
 
 Default: `false`
 
@@ -432,7 +425,7 @@ Set `developerIndicators` to `true` in `options` during development for a visual
 Currently only displays when scrollIntent is attached to `window`.
 
 
-###Public Variables and Methods
+### Public Variables and Methods
 
 The following variables and methods are available publicly:
 
