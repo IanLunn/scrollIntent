@@ -186,7 +186,7 @@ String: A percentage value, `"50%"` equates to 50% of the height of the element 
 
 Example: `100`
 
-The minimum amount of pixels the user needs to be scrolling within the `scrollThreshold` ([see scrollThreshold option](#scrollThreshold)), as defined in scrollIntent's settings. The default can be overridden in `options` ([see Options](#options)).
+The minimum amount of pixels the user needs to be scrolling within the `scrollThreshold` ([see scrollThreshold option](#scrollthreshold)), as defined in scrollIntent's settings. The default can be overridden in `options` ([see Options](#options)).
 
 By default, `scrollThreshold` is 100 milliseconds, so specifying `minSpeed: 100` would mean the user must be scrolling at least 100px in 100 milliseconds for the condition to be true.
 
@@ -197,7 +197,7 @@ By default, `scrollThreshold` is 100 milliseconds, so specifying `minSpeed: 100`
 
 Example: `100`
 
-The maximum amount of pixels the user must be scrolling within the `scrollThreshold` ([see scrollThreshold option](#scrollThreshold)), as defined in scrollIntent's settings. The default can be overridden in `options` ([see Options](#options)).
+The maximum amount of pixels the user must be scrolling within the `scrollThreshold` ([see scrollThreshold option](#scrollthreshold)), as defined in scrollIntent's settings. The default can be overridden in `options` ([see Options](#options)).
 
 By default, `scrollThreshold` is 100 milliseconds, so specifying `maxSpeed: 100` would mean the user must be scrolling at most 100px in 100 milliseconds for the condition to be true.
 
@@ -468,7 +468,7 @@ The following variables and methods are available publicly:
 
 Contains your defined actions, including the `computedWaypoint`.
 
-The <a name="computed-waypoint">`computedWaypoint`</a> is the final pixel value based on the `waypoint`/`minWaypoint`/`maxWaypoint`, `waypointOffset`, and `waypointRelativeTo` conditions and action modifiers.
+The `computedWaypoint` is the final pixel value based on the `waypoint`/`minWaypoint`/`maxWaypoint`, `waypointOffset`, and `waypointRelativeTo` conditions and action modifiers.
 
 Assuming `waypoint` is given a value of `"50%"`, `waypointRelativeTo` has the value of `window`, and the window has a height of 600px, the `computedWaypoint` will be `300` = `windowHeight * .5`. If `waypointOffset` is specified with a value of `10`, the `computedWaypoint` will be `310` = `(windowHeight * .5) + 10`, and so on.
 
