@@ -92,7 +92,9 @@ Actions consist of:
 - [conditions](#conditions) - describe the user's behaviours required for the callback to be executed
 - [action modifiers](#action-modifiers) - options that change the way in which actions work
 
-#### callback `function(scrollIntent)`
+#### callback
+
+`function(scrollIntent)`
 
 `callback` is a function which is executed once all defined conditions are met.
 
@@ -115,25 +117,27 @@ Conditions describe the behaviour of the user required to execute the [callback]
 
 The following describes each condition.
 
-#####direction `string`
+#####direction
 
-`"up"` or `"down"`
+`string`: `"up"` or `"down"`
 
 The direction in which the scrollbar is moving.
 
-#####minDuration `number`
+#####minDuration
 
-A number representing milliseconds. `1000` is 1000 milliseconds (1 second)
+`number`: A number representing milliseconds. `1000` is 1000 milliseconds (1 second)
 
 The minimum duration of time the user must scroll before the condition is true.
 
-#####maxDuration `number`
+#####maxDuration
 
-A number representing milliseconds. `1000` is 1000 milliseconds (1 second)
+`number`: A number representing milliseconds. `1000` is 1000 milliseconds (1 second)
 
 The maximum duration of time the user must scroll before the condition is false.
 
-#####waypoint `number` or `string`
+#####waypoint
+
+`number` or `string`
 
 Example: `900` or `"50%"`
 
@@ -150,7 +154,9 @@ String: A percentage value, `"50%"` equates to 50% of the height of the element 
 Tip: Set `developerIndicators` to `true` in your scrollIntent options during development for a visual representation of `waypoint`.
 
 
-#####minWaypoint `number` or `string`
+#####minWaypoint
+
+`number` or `string`
 
 Example: `900` or `"50%"`
 
@@ -161,7 +167,9 @@ Number: A pixel value, `900` equates to 900px.
 String: A percentage value, `"50%"` equates to 50% of the height of the element scrollIntent is bound to. When using percentage values within a string, using the `%` identifier is optional - `"50%"` and `"50"` both represent 50% providing the values are within a string. Should you wish for the percentage to be relative to a different element, see the `waypointRelativeTo` action modifier.
 
 
-#####maxWaypoint `number` or `string`
+#####maxWaypoint
+
+`number` or `string`
 
 Example: `900` or `"50%"`
 
@@ -172,7 +180,9 @@ Number: A pixel value, `900` equates to 900px.
 String: A percentage value, `"50%"` equates to 50% of the height of the element scrollIntent is bound to. When using percentage values within a string, using the `%` identifier is optional - `"50%"` and `"50"` both represent 50% providing the values are within a string. Should you wish for the percentage to be relative to a different element, see the `waypointRelativeTo` action modifier.
 
 
-#####minSpeed `number`
+#####minSpeed
+
+`number`
 
 Example: `100`
 
@@ -181,7 +191,9 @@ The minimum amount of pixels the user needs to be scrolling within the `scrollTh
 By default, `scrollThreshold` is 100 milliseconds, so specifying `minSpeed: 100` would mean the user must be scrolling at least 100px in 100 milliseconds for the condition to be true.
 
 
-#####maxSpeed `number`
+#####maxSpeed
+
+`number`
 
 Example: `100`
 
@@ -189,7 +201,9 @@ The maximum amount of pixels the user must be scrolling within the `scrollThresh
 
 By default, `scrollThreshold` is 100 milliseconds, so specifying `maxSpeed: 100` would mean the user must be scrolling at most 100px in 100 milliseconds for the condition to be true.
 
-#####custom `function(scrollIntent)`
+#####custom
+
+`function(scrollIntent)`
 
 A custom function that must return `true` or `false`. If `true` is returned, the custom condition will be met.
 
@@ -211,7 +225,10 @@ The custom function is passed `scrollIntent`, which can be used to retrieve scro
 
 Action modifiers change the way in which an `action` behaves.
 
-#####callbacksPerAction `number`
+#####callbacksPerAction
+
+`number`
+
 Modifies: `callback`
 
 The amount of times `callback` should be executed during the action.
@@ -243,7 +260,9 @@ Using the `callbacksPerAction` action modifier, you could have this message show
   new ScrollIntent(window, actions);
   ```
 
-#####waypointRelativeTo `element`
+#####waypointRelativeTo
+
+`element`
 
 Modifies: `waypoint`, `minWaypoint`, and `maxWaypoint`  
 Default: The element scrollIntent is attached to
@@ -280,7 +299,9 @@ Should you wish for the waypoint to instead be 90% of the body/document height, 
 Tip: Set `developerIndicators` to `true` in `options` during development for a visual representation of `waypoint`.
 
 
-#####waypointOffset `number` or `string`
+#####waypointOffset
+
+`number` or `string`
 
 Example: `900` or `"50%"`  
 Modifies: `waypoint`, `minWaypoint`, and `maxWaypoint`
@@ -307,7 +328,9 @@ String: A percentage value, `"50%"` equates to 50% of the height of the element 
 
 Tip: Set `developerIndicators` to `true` in `options` during development for a visual representation of `waypoint`.
 
-#####waypointOffsetRelativeTo `element`
+#####waypointOffsetRelativeTo
+
+`element`
 
 Modifies: `waypoint`, `minWaypoint`, and `maxWaypoint`
 
@@ -344,7 +367,9 @@ Should you wish for the `waypointOffset` to be instead relative to `document.bod
 
 The user will now need to scroll 200px plus, 50% of the page height (200px over the center of the document).
 
-#####destroyAfterNoOfCallbacks (TODO) `number`
+#####destroyAfterNoOfCallbacks (TODO)
+
+`number`
 
 **NOT YET IMPLEMENTED**
 
@@ -378,7 +403,9 @@ In this example, when the user scrolls down, the `hideMenu` function will be exe
 
 Options allow you to change the way in which scrollIntent operates. All of scrollIntent's options are already set by default so you don't need to specify your own options. Should you need to override a default option though, does so via the following options.
 
-#### scrollYOffset `number` or `string`
+#### scrollYOffset
+
+`number` or `string`
 
 Default: `0` (the top of the viewport)  
 Example: `50` or `"90%"`
@@ -390,7 +417,9 @@ Number: A pixel value, `50` equates to 50px.
 String: A percentage value, `"90%"` equates to 90% of the height of the viewport. When using percentage values within a string, using the `%` indentifier is optional - `"50%"` and `"50"` both represent 50% providing the values are within a string.
 
 
-#### scrollThreshold `number`
+#### scrollThreshold
+
+`number`
 
 Default: `100` (milliseconds)
 
@@ -400,7 +429,9 @@ To keep the performance of a web page optimal, the number of condition checks ar
 
 A callback only being able to execute every 100 milliseconds may seem a little too slow -- depending on your use for scrollIntent. If that's the case, the `scrollThreshold` can be reduced. Note that care should be taken to ensure a balance between responsive callbacks and page peformance.
 
-####resetCallbacksPerActionOnDirectionChange `true` or `false`
+####resetCallbacksPerActionOnDirectionChange
+
+`true` or `false`
 
 Default: `true`
 
@@ -408,7 +439,9 @@ Reset the number of callbacks allowed per action when the scroll direction chang
 
 The `callbacksPerAction` action modifier will be reset when the user changes scroll direction.
 
-####resetDurationOnDirectionChange `true` or `false`
+####resetDurationOnDirectionChange
+
+`true` or `false`
 
 Default: `false`
 
@@ -416,7 +449,9 @@ Reset the duration of the scroll event if the scroll direction changes.
 
 When using the `minDuration` and/or `maxDuration` conditions, the duration will be reset when the user changes scroll direction.
 
-#### developerIndicators `true` or `false`
+#### developerIndicators
+
+`true` or `false`
 
 Default: `false`
 
