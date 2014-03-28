@@ -39,7 +39,7 @@
     <p>The following actions are used to load additional content:</p>
 
     <ul>
-      <li>Load more content when the user scrolls down past a waypoint 300px from the bottom of the screen, at a speed slower than 40px per 100ms (using the mousewheel or scrollbar)</li>
+      <li>Load more content when the user scrolls down past a waypoint 300px from the bottom of the screen, at a speed slower than 100px per 250ms (using the mousewheel or scrollbar)</li>
       <li>Load more content when the user scrolls down past a waypoint 300px from the bottom of the screen (using the down or space keys)</li>
     </ul>
 
@@ -65,8 +65,8 @@ var actions = [
     // Move the waypoint up from the bottom of the body/document, by 300px
     waypointOffset: -300,
 
-    // Only when the user is scrolling less than 40px per 100ms
-    maxSpeed: 40,
+    // Only when the user is scrolling less than 80px per 200ms
+    maxSpeed: 80,
 
     // Only when the user is scrolling down
     direction: "down",
@@ -162,8 +162,8 @@ scrollIntent = new ScrollIntent(window, actions, options);
   <div id="console">
     <h3>Infinite Scrolling Demo:</h3>
     <div id="status">
-        <p>1. Scroll down until the red waypoint comes into view towards the bottom of the page. Now slowly scroll down at a speed no greater than 40px per 100ms (see the scroll speed indicator) so the red waypoint passes the blue line. When it does, new content will be loaded and the waypoint will be repositioned to always be 300px from the bottom of the page. Each time you pass the waypoint at this slow speed, new content is loaded -- creating "infinite scrolling".</p>
-        <p>2. The next time the waypoint passes the blue line, scroll at a speed greater than 40px per 100ms. The loading of new content will be skipped and you'll be able to reach the bottom of the page.</p>
+        <p>1. Scroll down until the red waypoint comes into view towards the bottom of the page. Now slowly scroll down at a speed no greater than 100px per 250ms (see the scroll speed indicator) so the red waypoint passes the blue line. When it does, new content will be loaded and the waypoint will be repositioned to always be 300px from the bottom of the page. Each time you pass the waypoint at this slow speed, new content is loaded -- creating "infinite scrolling".</p>
+        <p>2. The next time the waypoint passes the blue line, scroll at a speed greater than 100px per 250ms. The loading of new content will be skipped and you'll be able to reach the bottom of the page.</p>
         <p>When the user scrolls slowly, we can assume they are focused on the content. Loading more content as the user reaches the bottom allows them to remain focused on reading. However, to make the page more accessible and less frustrating for the user, when they scroll at a speed that suggests they are more focused on navigating elsewhere, we can skip loading content so they can reach the bottom of the page. A more inutitive approach to infinite scrolling!</p>
         <div id="activity"></div>
     </div>
@@ -231,8 +231,8 @@ scrollIntent = new ScrollIntent(window, actions, options);
         // Move the waypoint up from the bottom of the body/document, by 300px
         waypointOffset: -300,
 
-        // Only when the user is scrolling less than 40px per 100ms
-        maxSpeed: 40,
+        // Only when the user is scrolling less than 100px per 250ms
+        maxSpeed: 100,
 
         // Only when the user is scrolling down
         direction: "down",
@@ -313,7 +313,7 @@ scrollIntent = new ScrollIntent(window, actions, options);
       });
     }
 
-    // Show the current scroll speed every 100ms
+    // Show the current scroll speed every 250ms
     scrollIntent.scrolling = function() {
 
       speed.innerHTML = scrollIntent.scrollAmount;

@@ -39,7 +39,7 @@ scrollIntent is not supported on mobile/tablet devices. See [Limitations](#limit
 
 ## Performance
 
-When executing JavaScript during scrolling, care should be taken to ensure there are no impacts on performance. scrollIntent will run multiple conditional checks as the user scrolls. To do this without affecting performance, these conditional checks are run every 100 milliseconds. This amount of time can be changed in `options`. You should aim for a fine balance between performance and responsiveness of functions executed by scrollIntent.
+When executing JavaScript during scrolling, care should be taken to ensure there are no impacts on performance. scrollIntent will run multiple conditional checks as the user scrolls. To do this without affecting performance, these conditional checks are run every 250 milliseconds. This amount of time can be changed in `options`. You should aim for a fine balance between performance and responsiveness of functions executed by scrollIntent.
 
 ## Limitations
 

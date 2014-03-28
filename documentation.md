@@ -188,7 +188,7 @@ Example: `100`
 
 The minimum amount of pixels the user needs to be scrolling within the `scrollThreshold` ([see scrollThreshold option](#scrollthreshold)), as defined in scrollIntent's settings. The default can be overridden in `options` ([see Options](#options)).
 
-By default, `scrollThreshold` is 100 milliseconds, so specifying `minSpeed: 100` would mean the user must be scrolling at least 100px in 100 milliseconds for the condition to be true.
+By default, `scrollThreshold` is 250 milliseconds, so specifying `minSpeed: 100` would mean the user must be scrolling at least 100px in 250 milliseconds for the condition to be true.
 
 
 #####maxSpeed
@@ -199,7 +199,7 @@ Example: `100`
 
 The maximum amount of pixels the user must be scrolling within the `scrollThreshold` ([see scrollThreshold option](#scrollthreshold)), as defined in scrollIntent's settings. The default can be overridden in `options` ([see Options](#options)).
 
-By default, `scrollThreshold` is 100 milliseconds, so specifying `maxSpeed: 100` would mean the user must be scrolling at most 100px in 100 milliseconds for the condition to be true.
+By default, `scrollThreshold` is 250 milliseconds, so specifying `maxSpeed: 100` would mean the user must be scrolling at most 100px in 250 milliseconds for the condition to be true.
 
 #####custom
 
@@ -244,7 +244,7 @@ The amount of times `callback` should be executed during the action.
   new ScrollIntent(window, actions);
   ```
 
-In the above example, the console will show a message when the user is scrolling down, and will do so for every 100 milliseconds the user scrolls, as defined by the `scrollThreshold` option.
+In the above example, the console will show a message when the user is scrolling down, and will do so for every 250 milliseconds the user scrolls, as defined by the `scrollThreshold` option.
 
 Using the `callbacksPerAction` action modifier, you could have this message show in the console only once per action (each time the user completes the action of scrolling, then stopping), like so:
 
@@ -421,13 +421,13 @@ String: A percentage value, `"90%"` equates to 90% of the height of the viewport
 
 `number`
 
-Default: `100` (milliseconds)
+Default: `250` (milliseconds)
 
 The amount of time between condition checks whilst the user is scrolling.
 
-To keep the performance of a web page optimal, the number of condition checks are throttled whilst the user is scrolling. By default, when the user begins scrolling, scrollIntent will check whether conditions are true every 100 milliseconds, if they are, a callback will be executed. Thus, a callback can only be triggered at most every 100 milliseconds.
+To keep the performance of a web page optimal, the number of condition checks are throttled whilst the user is scrolling. By default, when the user begins scrolling, scrollIntent will check whether conditions are true every 250 milliseconds, if they are, a callback will be executed. Thus, a callback can only be triggered at most every 250 milliseconds.
 
-A callback only being able to execute every 100 milliseconds may seem a little too slow -- depending on your use for scrollIntent. If that's the case, the `scrollThreshold` can be reduced. Note that care should be taken to ensure a balance between responsive callbacks and page peformance.
+A callback only being able to execute every 250 milliseconds may seem a little too slow -- depending on your use for scrollIntent. If that's the case, the `scrollThreshold` can be reduced. Note that care should be taken to ensure a balance between responsive callbacks and page peformance.
 
 ####resetCallbacksPerActionOnDirectionChange
 

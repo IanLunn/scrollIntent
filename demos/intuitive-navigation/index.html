@@ -44,9 +44,9 @@
     <ul>
       <li>Hide the header when the user scrolls down past a waypoint at 300px</li>
       <li>Show the header when the user scrolls up past a waypoint at 300px</li>
-      <li>Show the header when a user scrolls faster than 60px per 100ms, anywhere after the waypoint at 300px</li>
-      <li>Hide the header when a user scrolls slower than 60px per 100ms, for at least 500ms, anywhere after the waypoint at 300px (using only the scrollbar or mousewheel)</li>
-      <li>Hide the header when a user scrolls slower than 60px per 100ms, anywhere after the waypoint at 300px (using only the keyboard's up/down keys)</li>
+      <li>Show the header when a user scrolls faster than 150px per 250ms, anywhere after the waypoint at 300px</li>
+      <li>Hide the header when a user scrolls slower than 150px per 250ms, for at least 500ms, anywhere after the waypoint at 300px (using only the scrollbar or mousewheel)</li>
+      <li>Hide the header when a user scrolls slower than 150px per 250ms, anywhere after the waypoint at 300px (using only the keyboard's up/down keys)</li>
     </ul>
 
     <p>In code, these actions are written like so:</p>
@@ -409,11 +409,11 @@ scrollIntent.scrollingStopped = function() {
 
       /*
        * Action 3: show the navigation anywhere after 300px,
-       * if the scrolling speed is greater than 60px per 100ms
+       * if the scrolling speed is greater than 150px per 250ms
        */
       {
         minWaypoint: 300,
-        minSpeed: 60,
+        minSpeed: 150,
         callbacksPerAction: 1,
         callback: function() {
 
@@ -428,12 +428,12 @@ scrollIntent.scrollingStopped = function() {
       /*
        * Actions 4: hide the navigation anywhere after 300px,
        * if scrolling via the scrollbar or mousewheel and the scrolling speed
-       * is less than 60px per 100ms and the navigation
+       * is less than 150px per 250ms and the navigation
        * has not already been displayed
        */
       {
         minWaypoint: 300,
-        maxSpeed: 60,
+        maxSpeed: 150,
         scrollMethod: ["scrollbar", "mousewheel"],
         minDuration: 500,
         callbacksPerAction: 1,
@@ -448,12 +448,12 @@ scrollIntent.scrollingStopped = function() {
       /*
        * Actions 5: hide the navigation anywhere after 300px,
        * if scrolling via the keyboard's up/down keys andthe scrolling speed
-       * is less than 60px per 100ms and the navigation
+       * is less than 150px per 250ms and the navigation
        * has not already been displayed
        */
       {
         minWaypoint: 300,
-        maxSpeed: 60,
+        maxSpeed: 150,
         scrollMethod: ["down", "up"],
         callbacksPerAction: 1,
         callback: function() {
@@ -486,13 +486,11 @@ scrollIntent.scrollingStopped = function() {
 
     speed = document.getElementById("speed");
 
-    // Show the current scroll speed every 100ms
-    setInterval(function() {
-
+    // Show the current scroll speed every 250ms
+    scrollIntent.scrolling = function() {
       speed.innerHTML = scrollIntent.scrollAmount;
       previousSpeed = scrollIntent.scrollAmount;
-    }, 100);
-
+    }
   </script>
 </body>
 </html>

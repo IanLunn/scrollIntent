@@ -27,7 +27,7 @@ var ScrollIntent = (function () {
         scrollYOffset: 0,
 
         // How often the scroll check should occur
-        scrollThreshold: 100,
+        scrollThreshold: 250,
 
         /*
          * Number of times callbacks should be executed between
