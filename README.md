@@ -7,6 +7,8 @@ Example uses:
 - [A Step Toward Better Infinite Scrolling](#a-step-toward-better-infinite-scrolling)
 - [Offer Immediate Navigation when the User Needs it](#offer-immediate-navigation-when-the-user-needs-it)
 
+[Read the article](http://ianlunn.co.uk/articles/experimenting-custom-functionality-appropriate-users-scrolling-behaviour/) that describes some uses for scrollIntent - [Experimenting with Custom Functionality Appropriate to a User’s Scrolling Behaviour](http://ianlunn.co.uk/articles/experimenting-custom-functionality-appropriate-users-scrolling-behaviour/)
+
 ### A Step Toward Better Infinite Scrolling
 
 On a page with infinite scrolling, if the user is scrolling down slowly, we can assume they are focused on the content and continue loading more content as they scroll. However, when the user scrolls down too fast to be focused on content, we can then stop loading content and instead, allow the user to naturally reach the page's end. Infinite scrolling with a footer -- the best of both worlds!
